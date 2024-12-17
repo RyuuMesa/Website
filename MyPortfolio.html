@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Justine Ryu B. Mesa</title>
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #333;
+            --header-bg: #002855;
+            --header-text: white;
+            --card-bg: white;
+            --footer-bg: #002855;
+            --footer-text: white;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1f2937;
+            --header-text: #e0e0e0;
+            --card-bg: #1c1c1c;
+            --footer-bg: #1f2937;
+            --footer-text: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border: 2px solid var(--header-text);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--header-bg);
+            color: var(--header-bg);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        p, ul {
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            margin-top: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-info {
+            font-size: 0.9em;
+            color: var(--text-color);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-btn {
+            cursor: pointer;
+            color: var(--header-bg);
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--header-bg);
+            color: var(--header-text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--header-text);
+            color: var(--header-bg);
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <header>
+        <img src="myprofile.jpg" alt="Justine Ryu B. Mesa">
+        <div>
+            <h1>Justine Ryu B. Mesa</h1>
+            <p id="greeting"></p>
+        </div>
+    </header>
+    <section>
+        <h2>About Me</h2>
+        <p>
+            I am a dedicated and passionate student pursuing a Bachelor of Science in Information Technology. At 20 years old, I have a strong enthusiasm for technology, application development, and storytelling through manga and manhwa.
+        </p>
+        <p>
+            I initially enrolled in Bachelor of Science in Environmental Science but shifted to Information Technology to align with my true interests and aspirations. This decision allowed me to focus on technology and programming, which excite and challenge me daily.
+        </p>
+    </section>
+    <section>
+        <h2>Skills</h2>
+        <p><span class="toggle-btn" onclick="toggleSkills()">Click to show/hide skills</span></p>
+        <ul id="skills">
+            <li>Computer System Hardware Maintenance and Repair</li>
+            <li>Proficiency in Programming Languages: Python, Java, HTML & CSS, JavaScript</li>
+            <li>Mobile Application Development</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Achievements</h2>
+        <ul>
+            <li title="Fixed hardware in a school showcase.">Fixed computer system hardware in a school showcase for freshmen.</li>
+            <li title="Developed a website for JJ's Burger.">Created a website for JJ's Burger using HTML, CSS, and JavaScript.</li>
+            <li title="Participated in BITSCON 2024.">Attended BITSCON 2024: "Digital Horizons: Navigating the Future of Technology."</li>
+            <li title="Currently working on Sea Cup Cafe project.">Currently working on "Sea Cup Cafe & Souvenirs Shop," a project using HTML, CSS, and JavaScript.</li>
+        </ul>
+    </section>
+    <footer>
+        <p>&copy; <span id="year"></span> Justine Ryu B. Mesa. All Rights Reserved.</p>
+        <div class="contact-info">
+            <p>Email: ryuumesa24@gmail.com | Phone: 0929-615-8634</p>
+        </div>
+    </footer>
+
+    <script>
+        const hours = new Date().getHours();
+        const greetingText = hours < 12 ? 'Good Morning!' :
+                             hours < 18 ? 'Good Afternoon!' : 'Good Evening!';
+        document.getElementById('greeting').textContent = greetingText;
+
+        function toggleSkills() {
+            const skills = document.getElementById('skills');
+            skills.classList.toggle('hidden');
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+    </script>
+</body>
+</html>
